@@ -11,7 +11,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        let onBoardingView = OnBoardingView(viewFrame: self.view.frame)
+        view = onBoardingView
     }
 
 
