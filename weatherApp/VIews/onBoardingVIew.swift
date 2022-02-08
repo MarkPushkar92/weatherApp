@@ -8,16 +8,22 @@
 import Foundation
 import UIKit
 
+// completed view
+
 class OnBoardingView: UIView {
     
     //MARK: PROPERTIES
+    
+    public var trackGeoClicker : UiViewClickHandler?
+    
+    public var doNotTrackGeoClicker : UiViewClickHandler?
 
     @objc private func trackGeoHandler() {
-         
+        trackGeoClicker?()
     }
 
     @objc private func doNotTrackGeoHandler() {
-        
+        doNotTrackGeoClicker?()
     }
 
     private lazy var doNotTrackGeoButton : UIButton = {
