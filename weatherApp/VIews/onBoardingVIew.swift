@@ -20,6 +20,7 @@ class OnBoardingView: UIView {
 
     @objc private func trackGeoHandler() {
         trackGeoClicker?()
+        print("track1")
     }
 
     @objc private func doNotTrackGeoHandler() {
