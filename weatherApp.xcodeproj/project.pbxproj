@@ -16,6 +16,9 @@
 		630A1A4127B3BAFF0099742D /* CoordinatorSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630A1A4027B3BAFF0099742D /* CoordinatorSetup.swift */; };
 		630A1A4327B3BEBC0099742D /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630A1A4227B3BEBC0099742D /* ViewModelFactory.swift */; };
 		630A1A4527B3BF970099742D /* OnBoardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630A1A4427B3BF970099742D /* OnBoardingCoordinator.swift */; };
+		633726BF27B62CC800F7CF80 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 633726BE27B62CC800F7CF80 /* RealmSwift */; };
+		633726C227B62DCB00F7CF80 /* RealmDBGP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633726C127B62DCB00F7CF80 /* RealmDBGP.swift */; };
+		633726C527B62F2800F7CF80 /* CurrentLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633726C427B62F2800F7CF80 /* CurrentLocationProvider.swift */; };
 		636D243E27B24CCB00D66DA7 /* CommonThingsAndHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636D243D27B24CCB00D66DA7 /* CommonThingsAndHelpers.swift */; };
 		636D244027B2511500D66DA7 /* DetailedDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636D243F27B2511500D66DA7 /* DetailedDayView.swift */; };
 		636D244227B274A100D66DA7 /* perHourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636D244127B274A100D66DA7 /* perHourView.swift */; };
@@ -42,6 +45,8 @@
 		630A1A4027B3BAFF0099742D /* CoordinatorSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorSetup.swift; sourceTree = "<group>"; };
 		630A1A4227B3BEBC0099742D /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
 		630A1A4427B3BF970099742D /* OnBoardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCoordinator.swift; sourceTree = "<group>"; };
+		633726C127B62DCB00F7CF80 /* RealmDBGP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDBGP.swift; sourceTree = "<group>"; };
+		633726C427B62F2800F7CF80 /* CurrentLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CurrentLocationProvider.swift; path = ../../../../Documents/CurrentLocationProvider.swift; sourceTree = "<group>"; };
 		636D243D27B24CCB00D66DA7 /* CommonThingsAndHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonThingsAndHelpers.swift; sourceTree = "<group>"; };
 		636D243F27B2511500D66DA7 /* DetailedDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedDayView.swift; sourceTree = "<group>"; };
 		636D244127B274A100D66DA7 /* perHourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = perHourView.swift; sourceTree = "<group>"; };
@@ -61,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633726BF27B62CC800F7CF80 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +92,8 @@
 		6301903C27A94742005C82FB /* weatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				633726C327B62EDA00F7CF80 /* GeoAndNetWorking */,
+				633726C027B62D3A00F7CF80 /* RealmDB */,
 				630A1A3B27B3B91B0099742D /* Coordinators */,
 				6301903D27A94742005C82FB /* AppDelegate.swift */,
 				637EC97327A953820014F3EF /* VIews */,
@@ -108,6 +116,22 @@
 				630A1A4427B3BF970099742D /* OnBoardingCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		633726C027B62D3A00F7CF80 /* RealmDB */ = {
+			isa = PBXGroup;
+			children = (
+				633726C127B62DCB00F7CF80 /* RealmDBGP.swift */,
+			);
+			path = RealmDB;
+			sourceTree = "<group>";
+		};
+		633726C327B62EDA00F7CF80 /* GeoAndNetWorking */ = {
+			isa = PBXGroup;
+			children = (
+				633726C427B62F2800F7CF80 /* CurrentLocationProvider.swift */,
+			);
+			path = GeoAndNetWorking;
 			sourceTree = "<group>";
 		};
 		636D244527B276F500D66DA7 /* Collection Cells */ = {
@@ -176,6 +200,9 @@
 			dependencies = (
 			);
 			name = weatherApp;
+			packageProductDependencies = (
+				633726BE27B62CC800F7CF80 /* RealmSwift */,
+			);
 			productName = weatherApp;
 			productReference = 6301903A27A94742005C82FB /* weatherApp.app */;
 			productType = "com.apple.product-type.application";
@@ -204,6 +231,9 @@
 				Base,
 			);
 			mainGroup = 6301903127A94742005C82FB;
+			packageReferences = (
+				633726BD27B62CC800F7CF80 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 6301903B27A94742005C82FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -242,6 +272,8 @@
 				637EC97227A953750014F3EF /* onBoardingVIew.swift in Sources */,
 				638384F627AE47C7009062EE /* MainScreenView.swift in Sources */,
 				6383850227AE57F0009062EE /* DayDisplayView.swift in Sources */,
+				633726C227B62DCB00F7CF80 /* RealmDBGP.swift in Sources */,
+				633726C527B62F2800F7CF80 /* CurrentLocationProvider.swift in Sources */,
 				6383850027AE530F009062EE /* DailyHeaderView.swift in Sources */,
 				630A1A4127B3BAFF0099742D /* CoordinatorSetup.swift in Sources */,
 				636D243E27B24CCB00D66DA7 /* CommonThingsAndHelpers.swift in Sources */,
@@ -458,6 +490,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		633726BD27B62CC800F7CF80 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		633726BE27B62CC800F7CF80 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 633726BD27B62CC800F7CF80 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6301903227A94742005C82FB /* Project object */;
 }

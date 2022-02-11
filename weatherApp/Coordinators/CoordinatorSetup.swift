@@ -22,11 +22,6 @@ enum CoordinatorEvent {
 //    case hourSummaryViewToMainViewEvent
 }
 
-enum OnboardingMode {
-    case withCurrentLocation
-    case withoutCurrentLocation
-}
-
 protocol Coordinator : AnyObject {
     var navigationController : UINavigationController? { get set }
     func processEvent(with type : CoordinatorEvent)
@@ -40,6 +35,11 @@ enum CoordinatingViewModelTypes {
 //    case settingsViewModel
 //    case daySummaryViewModel
 //    case hourSummaryViewModel
+}
+
+enum OnboardingMode {
+    case withCurrentLocation
+    case withoutCurrentLocation
 }
 
 extension Coordinator {

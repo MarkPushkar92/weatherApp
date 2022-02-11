@@ -19,7 +19,9 @@ class MainCoordinator : Coordinator, Coordinating {
     private func handleMainViewDisplay(mode : OnboardingMode) {
         
         let mainController = viewModelFactory.createViewModel(with: .mainViewModel, coordinator: self)
-        
+        if let vc = mainController as? MainViewController {
+            vc.setupViewForMode(mode)
+        }
         navigationController?.pushViewController(mainController, animated: true)
     }
     
@@ -30,8 +32,8 @@ class MainCoordinator : Coordinator, Coordinating {
 //                 .mainViewToHourSummaryViewEvent
             : self.coordinator?.processEvent(with: type)
             case .onboardingViewToMainViewEvent(let onboardingMode): handleMainViewDisplay(mode : onboardingMode)
-            default :
-            showCoordinatorAlert()
+//            default :
+//            showCoordinatorAlert()
         }
     }
     

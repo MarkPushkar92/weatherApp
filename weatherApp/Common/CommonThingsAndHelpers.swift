@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 typealias UiViewClickHandler = () -> Void
 
@@ -26,4 +27,13 @@ class ViewFiller {
         
         NSLayoutConstraint.activate(constraints)
     }
+}
+
+// GeoTracking Helpers
+
+typealias LocationUpdateHandler = (CLLocation) -> Void
+
+struct GeoPosition {
+    let latitude : Float
+    let longitude : Float
 }
