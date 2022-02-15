@@ -66,6 +66,7 @@ class AppCoordinator : Coordinator {
 //            "hourSummary" : createCoordinator(type: .hourSummaryViewModel)
         ]
         self.children?["onboarding"]?.start()
+     
     }
 }
 

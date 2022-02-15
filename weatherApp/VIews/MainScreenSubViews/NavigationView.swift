@@ -15,6 +15,7 @@ class NavigationView : UIView {
     //MARK: PROPERTIES
     
     public var menuClicker : UiViewClickHandler?
+    public var updateWeatherDataRequestHandler : UiUpdateWithWeatherDataRequestHandler?
     
     @objc private func menuButtonClickHandler() {
         menuClicker?()
@@ -62,10 +63,39 @@ class NavigationView : UIView {
         return view
     }()
     
+    //MARK: GEOCOORDINATES PROPERTIES
+    
+    var currentGeoCoordinates : String {
+        return currentGeoCoordinatestName
+    }
+    
+    private var geoCoordinatesArray : [String] = []
+    
+    private var currentGeoCoordinatestName : String {
+        get {
+            return currentLocationLabel.text ?? ""
+        }
+        set(newValue) {
+            currentLocationLabel.text = newValue
+            updateWeatherDataRequestHandler?(newValue)
+        }
+    }
+    
+    public var currentGeoCoordinatesArray : [String] {
+        get {
+            return geoCoordinatesArray
+        }
+        
+        set(newValue) {
+            locationPageControl.numberOfPages = newValue.count
+            geoCoordinatesArray = newValue
+            currentGeoCoordinatestName = geoCoordinatesArray[locationPageControl.currentPage]
+        }
+    }
+    
     //MARK: VIEWS SETUP
     
-    private func setupViews()
-    {
+    private func setupViews() {
         self.addSubview(menuButton)
         self.addSubview(locationButton)
         self.addSubview(currentLocationLabel)

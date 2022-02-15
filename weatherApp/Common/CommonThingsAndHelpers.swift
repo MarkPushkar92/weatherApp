@@ -10,8 +10,9 @@ import UIKit
 import CoreLocation
 
 typealias UiViewClickHandler = () -> Void
+typealias UiUpdateWithWeatherDataRequestHandler = (String) -> Void
 
-// Class Below is used to fill diffrerent views with subViews on the main screen
+//MARK: Class Below is used to fill diffrerent views with subViews on the main screen
 
 class ViewFiller {
     
@@ -29,11 +30,18 @@ class ViewFiller {
     }
 }
 
-// GeoTracking Helpers
+//MARK: GeoTracking Helpers
 
 typealias LocationUpdateHandler = (CLLocation) -> Void
 
 struct GeoPosition {
     let latitude : Float
     let longitude : Float
+}
+
+//MARK: Application Strings
+enum AppCommonStrings {
+    static let appName : String = "Weather App"
+    static let currentLocationLabel : String = "Текущее"
+    static let appRealmDbName = "weather_app_cache.realm"
 }
