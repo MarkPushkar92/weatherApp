@@ -25,6 +25,7 @@ class OnBoardingView: UIView {
 
     @objc private func doNotTrackGeoHandler() {
         doNotTrackGeoClicker?()
+        print("track1 without current location")
     }
 
     private lazy var doNotTrackGeoButton : UIButton = {

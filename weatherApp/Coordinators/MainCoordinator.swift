@@ -31,6 +31,7 @@ class MainCoordinator : Coordinator, Coordinating {
 //                 .mainViewToDaySummaryViewEvent,
 //                 .mainViewToHourSummaryViewEvent
             : self.coordinator?.processEvent(with: type)
+            
             case .onboardingViewToMainViewEvent(let onboardingMode): handleMainViewDisplay(mode : onboardingMode)
 //            default :
 //            showCoordinatorAlert()

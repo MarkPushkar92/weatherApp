@@ -70,8 +70,7 @@ class MainViewController: UIViewController, Coordinating {
 //    }
     
     private func setupView(geoItems : [String]) {
-        let mainView = MainScreenView(viewFrame: self.view.frame,
-                                geoPoints: geoItems)
+        let mainView = MainScreenView(viewFrame: self.view.frame, geoPoints: geoItems)
 
         mainView.menuClicker = { [weak self] in
             self?.coordinator?.processEvent(with: .mainViewToSettingsViewEvent)

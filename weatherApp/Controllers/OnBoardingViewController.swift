@@ -18,7 +18,8 @@ class OnBoardingViewController: UIViewController, Coordinating {
             guard let this = self else {
                 return
             }
-            this.coordinator?.processEvent(with: .onboardingViewToMainViewEvent(.withCurrentLocation))
+            self!.handleMainViewDisplay(mode: .withCurrentLocation)
+         //   this.coordinator?.processEvent(with: .onboardingViewToMainViewEvent(.withCurrentLocation))
             print("track2")
         }
         
@@ -26,7 +27,9 @@ class OnBoardingViewController: UIViewController, Coordinating {
             guard let this = self else {
                 return
             }
-            this.coordinator?.processEvent(with: .onboardingViewToMainViewEvent(.withoutCurrentLocation))
+            self!.handleMainViewDisplay(mode: .withoutCurrentLocation)
+          //  this.coordinator?.processEvent(with: .onboardingViewToMainViewEvent(.withoutCurrentLocation))
+            print("track2 without current location")
         }
         self.view = onBoardingView
     }
@@ -42,6 +45,20 @@ class OnBoardingViewController: UIViewController, Coordinating {
 //        view = onBoardingView
 //    }
 
+    //MARK: YOU'LL GOTTA DELETE DIS LATER
+    
+    private func handleMainViewDisplay(mode : OnboardingMode) {
+        
+        let viewModelFactory = ViewModelFactoryImpl()
+        let mainCoord = MainCoordinator(viewModelFactory: viewModelFactory)
+        
+        let mainController = viewModelFactory.createViewModel(with: .mainViewModel, coordinator: mainCoord)
+        if let vc = mainController as? MainViewController {
+            vc.setupViewForMode(mode)
+        }
+        navigationController?.pushViewController(mainController, animated: true)
+    }
+    
 
 }
 
