@@ -11,11 +11,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    private let appCoordinator = AppCoordinator()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       
         let navigationVC = UINavigationController()
-        let appCoordinator = AppCoordinator()
+        
         appCoordinator.navigationController = navigationVC
         window = UIWindow()
         window?.makeKeyAndVisible()

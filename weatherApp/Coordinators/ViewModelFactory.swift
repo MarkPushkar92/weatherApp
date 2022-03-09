@@ -13,6 +13,7 @@ protocol ViewModelFactory {
 }
 
 class ViewModelFactoryImpl : ViewModelFactory {
+    
     private func createViewModelBasedOnType(with type: CoordinatingViewModelTypes) -> UIViewController & Coordinating {
         
         switch type {
@@ -21,15 +22,15 @@ class ViewModelFactoryImpl : ViewModelFactory {
             
             case .mainViewModel :
                 return MainViewController()
-//
-//            case .daySummaryViewModel :
-//                return DaySummaryController()
-//
-//            case .hourSummaryViewModel :
-//                return HourSummaryViewController()
-//
-//            case .settingsViewModel :
-//                return SettingsViewController()
+            
+            case .daySummaryViewModel(let poiName, let weatherData) :
+                return createDaySummaryControllerWithUiSettings(poiName: poiName, weatherData: weatherData)
+            
+            case .hourSummaryViewModel(let poiName, let weatherData) :
+                return createHourlyControllerWithUiSettings(poiName: poiName, weatherData: weatherData)
+            
+            case .settingsViewModel :
+                return SettingsViewController()
         }
     }
     
@@ -37,6 +38,18 @@ class ViewModelFactoryImpl : ViewModelFactory {
         let viewModel = createViewModelBasedOnType(with : type)
         viewModel.coordinator = coordinator
         return viewModel
+    }
+    
+    private func createDaySummaryControllerWithUiSettings(poiName : String?, weatherData : WeatherDataMonthly?) -> DaySummaryController {
+            let controller = DaySummaryController()
+            controller.applyUiSettings(poiName: poiName, weatherData: weatherData)
+            return controller
+    }
+    
+    private func createHourlyControllerWithUiSettings(poiName : String?, weatherData : WeatherDataHourly?) -> HourSummaryViewController {
+            let controller = HourSummaryViewController()
+            controller.applyUiSettings(poiName: poiName, dataForUi: weatherData)
+            return controller
     }
 }
 

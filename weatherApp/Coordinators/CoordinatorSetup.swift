@@ -5,6 +5,8 @@
 //  Created by Марк Пушкарь on 09.02.2022.
 //
 
+// Completed File
+
 import Foundation
 import UIKit
 
@@ -15,11 +17,11 @@ protocol Coordinating : AnyObject {
 enum CoordinatorEvent {
     case onboardingViewToMainViewEvent(OnboardingMode)
     case mainViewToSettingsViewEvent
-//    case settingsViewToMainViewEvent
-//    case mainViewToDaySummaryViewEvent
-//    case daySummaryViewToMainViewEvent
-//    case mainViewToHourSummaryViewEvent
-//    case hourSummaryViewToMainViewEvent
+    case settingsViewToMainViewEvent
+    case mainViewToDaySummaryViewEvent(String?, WeatherDataMonthly?)
+    case daySummaryViewToMainViewEvent
+    case mainViewToHourSummaryViewEvent(String?, WeatherDataHourly?)
+    case hourSummaryViewToMainViewEvent
 }
 
 protocol Coordinator : AnyObject {
@@ -32,9 +34,9 @@ protocol Coordinator : AnyObject {
 enum CoordinatingViewModelTypes {
     case onboardingModel
     case mainViewModel
-//    case settingsViewModel
-//    case daySummaryViewModel
-//    case hourSummaryViewModel
+    case settingsViewModel
+    case daySummaryViewModel(String?, WeatherDataMonthly?)
+    case hourSummaryViewModel(String?, WeatherDataHourly?)
 }
 
 enum OnboardingMode {
@@ -43,7 +45,6 @@ enum OnboardingMode {
 }
 
 extension Coordinator {
-    
     func showCoordinatorAlert() {
         let alert = UIAlertController(title: "Unexpected Error", message: "Unexpected Coordiator Error", preferredStyle: .alert)
         let alertActionOK = UIAlertAction(title: "OK", style: .default)

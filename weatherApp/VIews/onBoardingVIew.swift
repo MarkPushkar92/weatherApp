@@ -12,7 +12,7 @@ import UIKit
 
 class OnBoardingView: UIView {
     
-    //MARK: PROPERTIES
+    //MARK: UI handlers and buttons
     
     public var trackGeoClicker : UiViewClickHandler?
     
@@ -52,6 +52,8 @@ class OnBoardingView: UIView {
         view.addTarget(self, action: #selector(trackGeoHandler), for: .touchUpInside)
         return view
     }()
+    
+    //MARK: text labels and onboarding image
 
     private let firstLabel : UILabel = {
         var view = UILabel()
@@ -92,7 +94,6 @@ class OnBoardingView: UIView {
         return view
     }()
 
-    
     private let onboardingImageView : UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
@@ -101,6 +102,8 @@ class OnBoardingView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    //MARK: scroll view and container properties
     
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -202,11 +205,9 @@ class OnBoardingView: UIView {
             doNotTrackGeoButton.heightAnchor.constraint(equalToConstant: 40),
             doNotTrackGeoButton.topAnchor.constraint(equalTo: trackGeoButton.bottomAnchor, constant: 20)
         ]
-            
         constraints.forEach {
             $0.priority = .init(rawValue: 999)
         }
-            
         NSLayoutConstraint.activate(constraints)
     }
         

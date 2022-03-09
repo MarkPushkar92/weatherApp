@@ -5,6 +5,8 @@
 //  Created by Марк Пушкарь on 09.02.2022.
 //
 
+// Completed File
+
 import Foundation
 import UIKit
 
@@ -27,14 +29,15 @@ class MainCoordinator : Coordinator, Coordinating {
     
     func processEvent(with type: CoordinatorEvent) {
         switch type {
-            case .mainViewToSettingsViewEvent
-//                 .mainViewToDaySummaryViewEvent,
-//                 .mainViewToHourSummaryViewEvent
-            : self.coordinator?.processEvent(with: type)
-            
-            case .onboardingViewToMainViewEvent(let onboardingMode): handleMainViewDisplay(mode : onboardingMode)
-//            default :
-//            showCoordinatorAlert()
+            case .mainViewToSettingsViewEvent,
+                 .mainViewToDaySummaryViewEvent,
+                 .mainViewToHourSummaryViewEvent:
+                self.coordinator?.processEvent(with: type)
+    
+            case .onboardingViewToMainViewEvent(let onboardingMode):
+            handleMainViewDisplay(mode: onboardingMode)
+            default :
+            showCoordinatorAlert()
         }
     }
     

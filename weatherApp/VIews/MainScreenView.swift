@@ -8,9 +8,11 @@
 import Foundation
 import UIKit
 
+// completed view
+
 class MainScreenView: UIView {
     
-    //MARK: PROPERTIES
+    //MARK: UI Handler properties
     
     public var menuClicker : UiViewClickHandler?
     public var dailyClicker : UiViewClickHandler?
@@ -18,15 +20,17 @@ class MainScreenView: UIView {
     public var updateWeatherDataRequestClicker : UiUpdateWithWeatherDataRequestHandler?
     public var addLocationClickHandler : UiViewClickHandler?
     
-    var existingGeoPoints : Int {
+    //MARK: Geo positioning properties
+    
+    var availableGeoPoints : Int {
         get {
-            return navigationArea.currentGeoCoordinatesArray.count
+            return navigationArea.currentGeoPoints.count
         }
     }
     
     var currentGeoPoint : String {
         get {
-            return navigationArea.currentGeoCoordinates
+            return navigationArea.currentGeoPoint
         }
     }
     
@@ -54,13 +58,13 @@ class MainScreenView: UIView {
     
     private lazy var navigationArea : NavigationView = {
         let view = NavigationView(viewFrame: .zero)
-        view.menuClicker = { [weak self] in
+        view.menuClickHandler = { [weak self] in
             self?.menuClicker?()
         }
         
-//        view.addLocationClickHandler = { [weak self] in
-//            self?.addLocationClickHandler?()
-//        }
+        view.addLocationClickHandler = { [weak self] in
+            self?.addLocationClickHandler?()
+        }
         
         view.updateWeatherDataRequestHandler = { [weak self] pointName in
             self?.updateWeatherDataRequestClicker?(pointName)
@@ -69,16 +73,16 @@ class MainScreenView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
         
-//        let leftSwipe = UISwipeGestureRecognizer()
-//        leftSwipe.direction = .left
-//        leftSwipe.addTarget(self, action: #selector(leftSwipeHandler))
-//
-//        let rightSwipe = UISwipeGestureRecognizer()
-//        rightSwipe.direction = .right
-//        rightSwipe.addTarget(self, action: #selector(rightSwipeHandler))
-//
-//        view.addGestureRecognizer(leftSwipe)
-//        view.addGestureRecognizer(rightSwipe)
+        let leftSwipe = UISwipeGestureRecognizer()
+        leftSwipe.direction = .left
+        leftSwipe.addTarget(self, action: #selector(leftSwipeHandler))
+
+        let rightSwipe = UISwipeGestureRecognizer()
+        rightSwipe.direction = .right
+        rightSwipe.addTarget(self, action: #selector(rightSwipeHandler))
+
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
         
         return view
     }()
@@ -115,8 +119,8 @@ class MainScreenView: UIView {
     }()
     
     private lazy var DailyHeaderAreaView : UIView = {
-        let view = DailyHeaderView(viewFrame: .zero)
-        view.dailyDetailsClicker = { [weak self] in
+        let view = PerDayHeaderAreaView(viewFrame: .zero)
+        view.perDayDetailsHandler = { [weak self] in
             self?.dailyClicker?()
         }
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +134,7 @@ class MainScreenView: UIView {
     
     //MARK: main screen subViews - views
     
-    private let dayDisplayView : UIView = {
+    private let dayDisplayView : DayDisplayView = {
         let view = DayDisplayView(viewFrame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -145,14 +149,14 @@ class MainScreenView: UIView {
         return view
     }()
         
-    private let perHourDataView : UIView = {
-        let view = PerHourView(viewFrame: .zero)
+    private let perHourDataView : PerHourDataView = {
+        let view = PerHourDataView(viewFrame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let perDayAreaView : UIView = {
-        let view = PerDayView(viewFrame: .zero)
+    private let perDayAreaView : PerDayAreaView = {
+        let view = PerDayAreaView(viewFrame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -165,12 +169,53 @@ class MainScreenView: UIView {
         view.tintColor = .black
         view.backgroundColor = .white
         view.isUserInteractionEnabled = true
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(plusImageViewClickHandler))
         view.addGestureRecognizer(tap)
         
         return view
     }()
+    
+    //MARK: OTHER METHOGS
+    
+    func addNewCity(cityName : String) {
+        var geoCoords = navigationArea.currentGeoPoints
+        if !geoCoords.contains(cityName) {
+            geoCoords.append(cityName)
+            navigationArea.currentGeoPoints = geoCoords
+        }
+    }
+    
+    @objc private func leftSwipeHandler() {
+        navigationArea.handleLeftSwipe()
+    }
+
+    @objc private func rightSwipeHandler() {
+        navigationArea.handleRightSwipe()
+    }
+    
+    @objc private func plusImageViewClickHandler() {
+        addLocationClickHandler?()
+    }
+    
+    func applyModelData(dataForUi : [UiPerDayCollectionDataItem]) {
+        perDayAreaView.updateWithModelData(data: dataForUi)
+    }
+    
+    func applyModelData(dataForUi : [UiPerHourCollectionDataItem]) {
+        perHourDataView.updateWithModelData(data: dataForUi)
+    }
+    
+    func applyModelData(dataForUi : UiWeatherDataOneDay) {
+        dayDisplayView.sunriseTime = dataForUi.sunriseTime
+        dayDisplayView.sunsetTime = dataForUi.sunsetTime
+        dayDisplayView.calendarTime = dataForUi.dayTimePeriod
+        dayDisplayView.feelsLikeTemperature = dataForUi.feelsLikeTemperature
+        dayDisplayView.currentTemperature = dataForUi.temperature
+        dayDisplayView.forecastDescription = dataForUi.description
+        dayDisplayView.clouds = dataForUi.clouds
+        dayDisplayView.wind = dataForUi.windSpeed
+        dayDisplayView.percipitation = dataForUi.humidity
+    }
     
     //MARK: VIEWS SETUP
     
@@ -211,7 +256,7 @@ class MainScreenView: UIView {
         NSLayoutConstraint.activate(constraints)
     }
             
-    private func setupViewsForExistingGeoPoints(initialGeoPoints : [String]) {
+    private func setupViewsForAvailableGeoPoints(initialGeoPoints : [String]) {
         self.addSubview(scrollView)
         scrollView.addSubview(scrollViewContainer)
         setupScrollView()
@@ -222,10 +267,10 @@ class MainScreenView: UIView {
         ViewFiller.fillAreaWithView(area: perHourArea, filler: perHourDataView)
         ViewFiller.fillAreaWithView(area: perDayHeaderArea, filler: DailyHeaderAreaView)
         ViewFiller.fillAreaWithView(area: perDayArea, filler: perDayAreaView)
-        navigationArea.currentGeoCoordinatesArray = initialGeoPoints
+        navigationArea.currentGeoPoints = initialGeoPoints
     }
     
-    private func setupViewsForNonExistingGeoPoints() {
+    private func setupViewsForNonAvailableGeoPoints() {
         self.addSubview(scrollView)
         scrollView.addSubview(scrollViewContainer)
         setupScrollView()
@@ -233,7 +278,7 @@ class MainScreenView: UIView {
         scrollViewContainer.addArrangedSubview(addLocationImageView)
         let constraints = [
             headerArea.heightAnchor.constraint(equalToConstant: 55+37),
-            addLocationImageView.heightAnchor.constraint(equalToConstant: self.bounds.height - 55 - 37 - 100)
+            addLocationImageView.heightAnchor.constraint(equalToConstant: 192)
         ]
         NSLayoutConstraint.activate(constraints)
                 
@@ -243,26 +288,13 @@ class MainScreenView: UIView {
     private func setupViews(geoItems : [String]) {
     
         if geoItems.isEmpty {
-            setupViewsForNonExistingGeoPoints()
+            setupViewsForNonAvailableGeoPoints()
         } else {
-            setupViewsForExistingGeoPoints(initialGeoPoints: geoItems)
+            setupViewsForAvailableGeoPoints(initialGeoPoints: geoItems)
         }
     }
     
-    //MARK: OTHER METHOGS
-    
-    func addNewCity(cityName : String) {
-        var geoCoords = navigationArea.currentGeoCoordinatesArray
-        if !geoCoords.contains(cityName) {
-            geoCoords.append(cityName)
-            navigationArea.currentGeoCoordinatesArray = geoCoords
-        }
-    }
-    
-    @objc private func plusImageViewClickHandler() {
-        addLocationClickHandler?()
-    }
-    
+   
     //MARK: INIT
     
     init(viewFrame : CGRect, geoPoints : [String]) {

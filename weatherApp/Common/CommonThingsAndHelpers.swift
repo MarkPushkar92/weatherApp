@@ -11,6 +11,11 @@ import CoreLocation
 
 typealias UiViewClickHandler = () -> Void
 typealias UiUpdateWithWeatherDataRequestHandler = (String) -> Void
+typealias UiSelectedDayChangedHandler = (Int) -> Void
+
+typealias OneDayWeatherDataHandler = (WeatherDataOneDay?) -> ()
+typealias HourlyWeatherDataHandler = (WeatherDataHourly?) -> ()
+typealias MonthlyWeatherDataHandler = (WeatherDataMonthly?) -> ()
 
 //MARK: Class Below is used to fill diffrerent views with subViews on the main screen
 
@@ -44,4 +49,13 @@ enum AppCommonStrings {
     static let appName : String = "Weather App"
     static let currentLocationLabel : String = "Текущее"
     static let appRealmDbName = "weather_app_cache.realm"
+}
+
+//MARK: UserDefaultsSettingsKeys
+
+enum UserDefaultsSettingsKeys {
+    static let temperatureSettings : String = "temperatureInCelsiusOrFahrenheit"
+    static let windSpeedSettings : String = "windSpeedInMiOrKm"
+    static let timeFormatSettings : String = "12HourOr24HourFormat"
+    static let notificationSettings : String = "notificationsAreOnOrOff"
 }
