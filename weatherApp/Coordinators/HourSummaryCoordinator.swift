@@ -19,14 +19,13 @@ class HourSummaryCoordinator : Coordinator, Coordinating {
     private let viewModelFactory : ViewModelFactory
     
     private func handleSwitchFromMainViewToHourSummaryView(poiName : String?, dataForUi : WeatherDataHourly?) {
-        let hourSummaryController = viewModelFactory.createViewModel(with: .hourSummaryViewModel(poiName, dataForUi), coordinator: self)
         
-        if let vc = hourSummaryController as? HourSummaryViewController {
-            vc.applyUiSettings(poiName : poiName, dataForUi: dataForUi)
-        }
-
+        let hourSummaryController = viewModelFactory.createViewController(with: .hourSummaryViewModel(poiName, dataForUi), coordinator: self)
+        
         navigationController?.pushViewController(hourSummaryController, animated: true)
     }
+
+   
     
     func processEvent(with type: CoordinatorEvent) {
         switch type {

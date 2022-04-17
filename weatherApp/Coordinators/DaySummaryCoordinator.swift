@@ -20,7 +20,7 @@ class DaySummaryCoordinator : Coordinator, Coordinating {
     
     private func handleSwitchFromMainViewToDaySummaryView(poiName : String?, weatherData : WeatherDataMonthly?) {
         
-        let daySummaryController = viewModelFactory.createViewModel(with: .daySummaryViewModel(poiName, weatherData), coordinator: self)
+        let daySummaryController = viewModelFactory.createViewController(with: .daySummaryViewModel(poiName, weatherData), coordinator: self)
 
         if let vc = daySummaryController as? DaySummaryController {
             vc.applyUiSettings(poiName: poiName, weatherData: weatherData)

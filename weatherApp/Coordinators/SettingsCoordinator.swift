@@ -20,7 +20,7 @@ class SettingsCoordinator : Coordinator, Coordinating {
     
     private func handleSwitchFromMainViewToSettingsView() {
         
-        let settingsController = viewModelFactory.createViewModel(with: .settingsViewModel, coordinator: self)
+        let settingsController = viewModelFactory.createViewController(with: .settingsViewModel, coordinator: self)
         
         navigationController?.pushViewController(settingsController, animated: true)
     }

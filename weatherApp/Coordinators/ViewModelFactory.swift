@@ -9,10 +9,21 @@ import Foundation
 import UIKit
 
 protocol ViewModelFactory {
-    func createViewModel(with type : CoordinatingViewModelTypes, coordinator : Coordinator ) -> UIViewController & Coordinating
+    func createViewController(with type : CoordinatingViewModelTypes, coordinator : Coordinator ) -> UIViewController & Coordinating
 }
 
 class ViewModelFactoryImpl : ViewModelFactory {
+    private func createDaySummaryControllerWithUiSettings(poiName : String?, weatherData : WeatherDataMonthly?) -> DaySummaryController {
+            let controller = DaySummaryController()
+            controller.applyUiSettings(poiName: poiName, weatherData: weatherData)
+            return controller
+    }
+    
+    private func createHourlyControllerWithUiSettings(poiName : String?, weatherData : WeatherDataHourly?) -> HourSummaryViewController {
+            let controller = HourSummaryViewController()
+            controller.applyUiSettings(poiName: poiName, dataForUi: weatherData)
+            return controller
+    }
     
     private func createViewModelBasedOnType(with type: CoordinatingViewModelTypes) -> UIViewController & Coordinating {
         
@@ -34,22 +45,11 @@ class ViewModelFactoryImpl : ViewModelFactory {
         }
     }
     
-    func createViewModel(with type: CoordinatingViewModelTypes, coordinator: Coordinator) -> UIViewController & Coordinating {
+    func createViewController(with type: CoordinatingViewModelTypes, coordinator: Coordinator) -> UIViewController & Coordinating {
+        
         let viewModel = createViewModelBasedOnType(with : type)
         viewModel.coordinator = coordinator
         return viewModel
-    }
-    
-    private func createDaySummaryControllerWithUiSettings(poiName : String?, weatherData : WeatherDataMonthly?) -> DaySummaryController {
-            let controller = DaySummaryController()
-            controller.applyUiSettings(poiName: poiName, weatherData: weatherData)
-            return controller
-    }
-    
-    private func createHourlyControllerWithUiSettings(poiName : String?, weatherData : WeatherDataHourly?) -> HourSummaryViewController {
-            let controller = HourSummaryViewController()
-            controller.applyUiSettings(poiName: poiName, dataForUi: weatherData)
-            return controller
     }
 }
 

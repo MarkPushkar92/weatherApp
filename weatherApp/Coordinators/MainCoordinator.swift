@@ -20,7 +20,7 @@ class MainCoordinator : Coordinator, Coordinating {
     
     private func handleMainViewDisplay(mode : OnboardingMode) {
         
-        let mainController = viewModelFactory.createViewModel(with: .mainViewModel, coordinator: self)
+        let mainController = viewModelFactory.createViewController(with: .mainViewModel, coordinator: self)
         if let vc = mainController as? MainViewController {
             vc.setupViewForMode(mode)
         }

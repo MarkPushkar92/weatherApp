@@ -28,7 +28,7 @@ class OnBoardingCoordinator : Coordinator, Coordinating {
     }
     
     func start() {
-        let onBoardingVC = viewModelFactory.createViewModel(with: .onboardingModel, coordinator: self)
+        let onBoardingVC = viewModelFactory.createViewController(with: .onboardingModel, coordinator: self)
         navigationController?.setViewControllers([onBoardingVC], animated: true)
     }
     

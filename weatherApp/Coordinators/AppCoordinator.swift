@@ -42,7 +42,7 @@ class AppCoordinator : Coordinator {
         }
     }
 
-    private let vcFactory = ViewModelFactoryImpl()
+    private let vcFactory: ViewModelFactory
     
     private func createCoordinator(type : CoordinatingViewModelTypes) -> Coordinator & Coordinating {
         var result : Coordinator & Coordinating
@@ -78,6 +78,10 @@ class AppCoordinator : Coordinator {
         ]
         
         self.children?[.onboarding]?.start()
+    }
+    
+    init(viewModelFactory : ViewModelFactory) {
+        vcFactory = viewModelFactory
     }
 }
 
