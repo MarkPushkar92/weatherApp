@@ -70,7 +70,10 @@ class MainViewController : UIViewController, Coordinating {
                     GeoPointsDB.shared.addGeoPoint(geoPoint: dbGeoPoint)
                     
                     self?.updateViewAfterAddingNewPoi(poiName: cityName)
-                    print(geoPosition.latitude, geoPosition.longitude)
+                    
+                    
+//                    print("Geoposition is \(geoPosition.latitude), \(geoPosition.longitude)")
+//                    print("DB Geoposition is \(dbGeoPoint.latitude), \(dbGeoPoint.longitude)")
                 }
             }
         }
@@ -195,6 +198,8 @@ class MainViewController : UIViewController, Coordinating {
 
             currentLocationProvider.updateLocation()
         }
+//        let smth = GeoPointsDB.shared.getGeoPoint(id: "Москва")
+//        print("Геопозиция москвы: \(String(describing: smth?.longitude)), \(String(describing: smth?.latitude))")
         
     }
     

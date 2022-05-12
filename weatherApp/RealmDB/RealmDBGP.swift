@@ -7,13 +7,14 @@
 
 // Completed File
 
+
 import Foundation
 import RealmSwift
 
 @objcMembers class DbGeoPointCached: Object {
     dynamic var id: String = ""
-    dynamic var latitude: Float?
-    dynamic var longitude: Float?
+    dynamic var latitude: Float = 0.0
+    dynamic var longitude: Float = 0.0
     
     override static func primaryKey() -> String? {
         return "id"
@@ -32,12 +33,12 @@ final class DbGeoPoint {
     }
 }
 
-class DbDataProvider {
+class GeoPointsDbProvider {
     private var realm: Realm?
     
     init() {
         var config = Realm.Configuration()
-        config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent("geo_points.realm")
+        config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent(AppCommonStrings.appRealmDbName)
         realm = try? Realm(configuration: config)
     }
     
@@ -49,8 +50,8 @@ class DbDataProvider {
         if let geoPoints = realm?.objects(DbGeoPointCached.self) {
             return geoPoints.compactMap { cachedItem in
                 return DbGeoPoint(id: cachedItem.id,
-                                  latitude: cachedItem.latitude ?? 0.0,
-                                  longitude: cachedItem.longitude ?? 0.0)
+                                  latitude: cachedItem.latitude ,
+                                  longitude: cachedItem.longitude )
             }
         } else {
             return []
@@ -61,8 +62,11 @@ class DbDataProvider {
         let geoPoints = realm?.object(ofType: DbGeoPointCached.self, forPrimaryKey: id)
         if let geoPoints = geoPoints {
             let ret = DbGeoPoint(id: geoPoints.id,
-                                 latitude: geoPoints.latitude ?? 0.0,
-                                 longitude: geoPoints.longitude ?? 0.0)
+                                 latitude: geoPoints.latitude ,
+                                 longitude: geoPoints.longitude )
+            
+            print("getGeoPoint \(ret.latitude), \(ret.longitude)")
+            
             return ret
         } else {
             return nil
@@ -74,14 +78,16 @@ class DbDataProvider {
         cachedGeoPoint.id = geoPoint.id
         cachedGeoPoint.latitude = geoPoint.latitude
         cachedGeoPoint.longitude = geoPoint.longitude
-        
+
         if isGeoPointExist(id: geoPoint.id) {
             try? realm?.write {
-                realm?.add(cachedGeoPoint, update: .modified)
+               realm?.add(cachedGeoPoint, update: .modified)
+               // realm?.add(cachedGeoPoint, update: .all)
             }
         } else {
             try? realm?.write {
                 realm?.add(cachedGeoPoint)
+                print("addGeoPoint \(cachedGeoPoint.latitude), \(cachedGeoPoint.longitude)")
             }
         }
     }
@@ -92,8 +98,7 @@ class DbDataProvider {
 }
 
 class GeoPointsDB {
-    
-    private let dbDataProvider : DbDataProvider = DbDataProvider()
+    private let dbDataProvider : GeoPointsDbProvider = GeoPointsDbProvider()
     
     static var shared: GeoPointsDB = {
         let instance = GeoPointsDB()
@@ -118,3 +123,4 @@ class GeoPointsDB {
         return dbDataProvider.getGeoPoints()
     }
 }
+

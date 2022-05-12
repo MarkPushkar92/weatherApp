@@ -54,7 +54,11 @@ class WeatherDataProvider {
             if let geoPoint = geoPointsDb.getGeoPoint(id: poi) {
                 let latitudeString = "\(geoPoint.latitude)"
                 let longitudeString = "\(geoPoint.longitude)"
-
+                
+                
+                print("Geoposition for one day data \(latitudeString), \(longitudeString), \(geoPoint.id)")
+                
+                
                 apiClient.getOneDayForecast(latitude: latitudeString,
                                             longitude: longitudeString) { [weak self] weatherData in
                     DispatchQueue.main.async { [weak self] in
