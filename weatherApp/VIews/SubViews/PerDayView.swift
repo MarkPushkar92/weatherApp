@@ -84,7 +84,6 @@ extension PerDayAreaView : UICollectionViewDataSource {
         cell.calendarDate = modelItem.calendarDate
         cell.humidity = modelItem.humidity
         cell.forecastTemperature = modelItem.forecastTemperature
-       // cell.forecastDescription = modelItem.description
         cell.forecastDescription = loc
         return cell
     }

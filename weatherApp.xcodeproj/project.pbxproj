@@ -74,6 +74,7 @@
 		638DF34827C0C72A00DF1DB1 /* HourSummaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638DF34727C0C72A00DF1DB1 /* HourSummaryCoordinator.swift */; };
 		639AF40C2830D6B400F544AC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 639AF40E2830D6B400F544AC /* Localizable.strings */; };
 		639AF4122830D9DC00F544AC /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639AF4112830D9DC00F544AC /* Localization.swift */; };
+		639AF4152830F2D100F544AC /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 639AF4142830F2D100F544AC /* Charts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +167,7 @@
 				636AE82E27C2400300BC1F97 /* SwiftyJSON in Frameworks */,
 				633726BF27B62CC800F7CF80 /* RealmSwift in Frameworks */,
 				634DC5AC27BB7AA30070C915 /* Alamofire in Frameworks */,
+				639AF4152830F2D100F544AC /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +370,7 @@
 				633726BE27B62CC800F7CF80 /* RealmSwift */,
 				634DC5AB27BB7AA30070C915 /* Alamofire */,
 				636AE82D27C2400300BC1F97 /* SwiftyJSON */,
+				639AF4142830F2D100F544AC /* Charts */,
 			);
 			productName = weatherApp;
 			productReference = 6301903A27A94742005C82FB /* weatherApp.app */;
@@ -424,6 +427,7 @@
 				633726BD27B62CC800F7CF80 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				634DC5AA27BB7AA30070C915 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				636AE82C27C2400300BC1F97 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				639AF4132830F2D100F544AC /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 6301903B27A94742005C82FB /* Products */;
 			projectDirPath = "";
@@ -832,6 +836,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		639AF4132830F2D100F544AC /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -849,6 +861,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 636AE82C27C2400300BC1F97 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		639AF4142830F2D100F544AC /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 639AF4132830F2D100F544AC /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

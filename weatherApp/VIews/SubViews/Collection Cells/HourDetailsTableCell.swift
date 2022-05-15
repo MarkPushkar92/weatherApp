@@ -149,7 +149,8 @@ class HourDetailsTableCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = UIFont.systemFont(ofSize: 14)
         view.text = "Преимущественно облачно. По ощущениям 10°"
-        view.lineBreakMode = .byTruncatingTail
+        view.numberOfLines = 0
+        view.lineBreakMode = .byWordWrapping
         return view
     }()
 
@@ -260,7 +261,7 @@ class HourDetailsTableCell: UITableViewCell {
             row0Label.centerYAnchor.constraint(equalTo: row0ImageView.centerYAnchor),
             row0Label.leadingAnchor.constraint(equalTo: row0ImageView.trailingAnchor, constant: 8),
             row0Label.widthAnchor.constraint(equalToConstant: 270),
-            row0Label.heightAnchor.constraint(equalToConstant: 20),
+          //  row0Label.heightAnchor.constraint(equalToConstant: 20),
 
             row1Label.centerYAnchor.constraint(equalTo: row1ImageView.centerYAnchor),
             row1Label.leadingAnchor.constraint(equalTo: row1ImageView.trailingAnchor, constant: 8),

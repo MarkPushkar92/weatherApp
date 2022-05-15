@@ -94,6 +94,7 @@ class ForecastDetailsView : UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.text = "13°"
         view.font = UIFont.boldSystemFont(ofSize: 18)
+        view.sizeToFit()
         return view
     }()
     
@@ -257,7 +258,7 @@ class ForecastDetailsView : UIView {
         let constraints = [
             degreeLabel.leadingAnchor.constraint(equalTo: weatherStatusLabel.centerXAnchor),
             degreeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            degreeLabel.widthAnchor.constraint(equalToConstant: 32),
+            degreeLabel.widthAnchor.constraint(equalToConstant: 32 + 10),
             degreeLabel.heightAnchor.constraint(equalToConstant: 36)
         ]
         

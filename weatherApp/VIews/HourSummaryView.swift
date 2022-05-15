@@ -25,6 +25,8 @@ class HourSummaryView : UIView {
     func applyUiData(poiName : String?, uiData : UiPerHourDetailsData) {
         cityLabel.text = poiName
      //   apply graph view
+        graphView.applyChartData(chartData: uiData.chartData)
+        
         detailsTable.applyDataForView(uiData: uiData.details)
     }
     
