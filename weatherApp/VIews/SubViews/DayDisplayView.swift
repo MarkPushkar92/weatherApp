@@ -199,7 +199,7 @@ class DayDisplayView : UIView {
     
     //MARK: Public Ui props. Check!!!
     
-    public var clouds : String { // Check Logic and Data's recieced!!!
+    public var clouds : String {
         get {
             return feelTemperatureLabel.text ?? ""
         }
@@ -209,7 +209,7 @@ class DayDisplayView : UIView {
         }
     }
     
-    public var percipitation : String { // Check naming!!!
+    public var percipitation : String {
         get {
             return percipitationLabel.text ?? ""
         }
@@ -219,7 +219,7 @@ class DayDisplayView : UIView {
         }
     }
     
-    public var forecastDescription : String { //Check This one Also!!!
+    public var forecastDescription : String {
         get {
             return forecastLabel.text ?? ""
         }
@@ -239,7 +239,7 @@ class DayDisplayView : UIView {
         }
     }
     
-    public var feelsLikeTemperature : String { // Check This!!!!
+    public var feelsLikeTemperature : String {
         get {
             return minMaxTemperatureLabel.text ?? ""
         }

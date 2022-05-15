@@ -82,7 +82,6 @@ class GeoPointsDbProvider {
         if isGeoPointExist(id: geoPoint.id) {
             try? realm?.write {
                realm?.add(cachedGeoPoint, update: .modified)
-               // realm?.add(cachedGeoPoint, update: .all)
             }
         } else {
             try? realm?.write {

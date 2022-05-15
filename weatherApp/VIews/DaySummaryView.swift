@@ -124,14 +124,13 @@ class DaySummaryView : UIView {
             guard let this = self else {return}
     
             this.dayDetailsView.DegreeValue = this.dayDetailsModelData[dayIndex].temperature
-            this.dayDetailsView.WeatherStatusLabel = this.dayDetailsModelData[dayIndex].description
+            this.dayDetailsView.WeatherStatusLabel = Localization.localizedString(key: this.dayDetailsModelData[dayIndex].description) 
             this.dayDetailsView.windSpeed = this.dayDetailsModelData[dayIndex].windSpeed
             this.dayDetailsView.humidity = this.dayDetailsModelData[dayIndex].humidity
             this.dayDetailsView.ufIndex = this.dayDetailsModelData[dayIndex].ufIndex
             this.dayDetailsView.cloudy = this.dayDetailsModelData[dayIndex].cloudy
-            
             this.nightDetailsView.DegreeValue = this.nightDetailsModelData[dayIndex].temperature
-            this.nightDetailsView.WeatherStatusLabel = this.nightDetailsModelData[dayIndex].description
+            this.nightDetailsView.WeatherStatusLabel = Localization.localizedString(key: this.nightDetailsModelData[dayIndex].description)
             this.nightDetailsView.windSpeed = this.nightDetailsModelData[dayIndex].windSpeed
             this.nightDetailsView.humidity = this.nightDetailsModelData[dayIndex].humidity
             this.nightDetailsView.ufIndex = this.nightDetailsModelData[dayIndex].ufIndex

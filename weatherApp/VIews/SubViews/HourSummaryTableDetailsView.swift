@@ -60,7 +60,7 @@ class HourSummaryTableDetailsView : UIView {
 extension HourSummaryTableDetailsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HourDetailsTableCell.self)) as! HourDetailsTableCell
-
+        
         let dataItem = modelData.items[indexPath.section]
         cell.calendarDate = dataItem.calendarDate
         cell.dayTime = dataItem.dayTime
@@ -69,7 +69,6 @@ extension HourSummaryTableDetailsView: UITableViewDataSource {
         cell.windDescription = dataItem.windDescription
         cell.humidity = dataItem.humidity
         cell.cloudy = dataItem.cloudy
-
         return cell
     }
     

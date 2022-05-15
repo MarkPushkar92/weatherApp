@@ -179,7 +179,7 @@ class WeatherDataToUiRepresentationConverter {
         let isFormat12Hour = userDefaults.bool(forKey: UserDefaultsSettingsKeys.timeFormatSettings)
         let isTemperatureInFah = userDefaults.bool(forKey: UserDefaultsSettingsKeys.temperatureSettings) == false
 
-        result.description = data.temperatureDescription.firstCapitalized
+        result.description = data.temperatureDescription
         
         let sunsetDate = NSDate(timeIntervalSince1970: data.sunset)
         result.sunsetTime = UIDateDateFormatter.formatTimeOfDay(date: sunsetDate as Date)

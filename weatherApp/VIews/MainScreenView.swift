@@ -211,7 +211,7 @@ class MainScreenView: UIView {
         dayDisplayView.calendarTime = dataForUi.dayTimePeriod
         dayDisplayView.feelsLikeTemperature = dataForUi.feelsLikeTemperature
         dayDisplayView.currentTemperature = dataForUi.temperature
-        dayDisplayView.forecastDescription = dataForUi.description
+        dayDisplayView.forecastDescription = Localization.localizedString(key: dataForUi.description).firstCapitalized
         dayDisplayView.clouds = dataForUi.clouds
         dayDisplayView.wind = dataForUi.windSpeed
         dayDisplayView.percipitation = dataForUi.humidity

@@ -78,11 +78,14 @@ extension PerDayAreaView : UICollectionViewDataSource {
         let cell =
         dayItemsCollection.dequeueReusableCell(withReuseIdentifier: String(describing: WeatherPerDayCell.self), for: indexPath) as! WeatherPerDayCell
 
+        
         let modelItem = modelData[indexPath.row]
+        let loc = Localization.localizedString(key: modelItem.description)
         cell.calendarDate = modelItem.calendarDate
         cell.humidity = modelItem.humidity
         cell.forecastTemperature = modelItem.forecastTemperature
-        cell.forecastDescription = modelItem.description
+       // cell.forecastDescription = modelItem.description
+        cell.forecastDescription = loc
         return cell
     }
 }
